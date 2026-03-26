@@ -1,0 +1,56 @@
+.page { padding-top: 100px; padding-bottom: 80px; min-height: 100vh; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+.header { margin-bottom: 24px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; color: var(--purple-300); margin-bottom: 14px; }
+.header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+.header p { color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Tabs */
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+.tab { padding: 10px 20px; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); font-family: var(--font-sans); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.tab:hover { color: var(--text-primary); border-color: var(--border-accent); }
+.tabActive { background: var(--purple-600); border-color: var(--purple-500); color: white; }
+
+/* Exam Bar */
+.examBar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.examSelect { display: flex; gap: 6px; }
+.examBtn { padding: 8px 18px; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.examBtn:hover { color: var(--text-primary); }
+.examActive { background: var(--accent); border-color: var(--purple-500); color: white; }
+.topicSelect { padding: 8px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: var(--font-sans); font-size: 0.85rem; outline: none; }
+
+/* Questions */
+.questionsList { display: flex; flex-direction: column; gap: 16px; }
+.questionCard { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; }
+.qHeader { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.qNum { font-size: 0.82rem; font-weight: 700; color: var(--purple-400); }
+.qText { font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; color: var(--text-primary); }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option { padding: 12px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-tertiary); color: var(--text-secondary); font-family: var(--font-sans); font-size: 0.88rem; cursor: pointer; transition: all 0.2s; text-align: left; display: flex; align-items: center; gap: 8px; }
+.option:hover:not(:disabled) { border-color: var(--border-accent); color: var(--text-primary); }
+.optionSelected { border-color: var(--purple-500); background: rgba(139,92,246,0.1); color: var(--text-primary); }
+.optionCorrect { border-color: #10b981 !important; background: rgba(16,185,129,0.1) !important; color: #6ee7b7 !important; }
+.optionWrong { border-color: #ef4444 !important; background: rgba(239,68,68,0.1) !important; color: #fca5a5 !important; }
+.qActions { margin-top: 12px; }
+.explanation { margin-top: 12px; padding: 12px 16px; background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); border-radius: var(--radius-md); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+.emptyState { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.emptyState code { background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; }
+
+/* University Finder */
+.uniForm { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 28px; }
+.uniFormGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.uniResults { margin-top: 8px; }
+.uniResults h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+.uniGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.uniCard { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 10px; transition: all 0.2s; }
+.uniCard:hover { border-color: var(--border-accent); }
+.uniHeader { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.uniHeader h4 { font-size: 1rem; font-weight: 700; }
+.chance { font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border: 1px solid; border-radius: var(--radius-full); text-transform: uppercase; letter-spacing: 0.04em; }
+.uniMeta { display: flex; gap: 14px; font-size: 0.8rem; color: var(--text-muted); }
+.uniMeta span { display: flex; align-items: center; gap: 4px; }
+.uniReason { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+.uniPrograms { display: flex; flex-wrap: wrap; gap: 4px; }
+
+@media (max-width: 768px) { .uniFormGrid { grid-template-columns: 1fr; } .examBar { flex-direction: column; align-items: flex-start; } .examSelect { flex-wrap: wrap; } }

@@ -1,0 +1,41 @@
+.page { padding-top: 100px; padding-bottom: 80px; min-height: 100vh; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+.header { margin-bottom: 32px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600; color: #6ee7b7; margin-bottom: 14px; }
+.header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+.header p { color: var(--text-secondary); font-size: 0.95rem; max-width: 620px; }
+
+/* Profile Form */
+.profileForm { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 32px; }
+.profileForm h3 { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Results */
+.results { display: flex; flex-direction: column; gap: 28px; }
+
+.adviceCard { background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(59,130,246,0.08)); border: 1px solid var(--border-accent); border-radius: var(--radius-xl); padding: 28px; }
+.adviceCard h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+.adviceCard p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; }
+
+.resultSection {}
+.resultTitle { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+.resultGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.resultCard { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; display: flex; flex-direction: column; gap: 8px; transition: all 0.2s; }
+.resultCard:hover { border-color: var(--border-accent); }
+.resultCard h4 { font-size: 1.05rem; font-weight: 700; }
+.cardPackage { font-size: 0.85rem; color: var(--text-secondary); }
+.cardReason { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.cardAction { font-size: 0.82rem; color: var(--purple-300); line-height: 1.5; }
+.eligible { border-left: 3px solid #10b981; }
+.borderline { border-left: 3px solid #f59e0b; }
+.avoid { border-left: 3px solid #ef4444; }
+
+/* Roadmap */
+.roadmapGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.roadmapCard { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 22px; }
+.roadmapMonth { font-size: 0.75rem; font-weight: 700; color: var(--purple-400); text-transform: uppercase; letter-spacing: 0.05em; }
+.roadmapCard h4 { font-size: 1rem; font-weight: 700; margin: 6px 0 10px; }
+.roadmapCard ul { list-style: disc; padding-left: 18px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+
+@media (max-width: 768px) { .formGrid { grid-template-columns: 1fr; } .formGrid button { grid-column: auto !important; } }

@@ -1,0 +1,57 @@
+.dashboard { padding-top: 100px; padding-bottom: 80px; min-height: 100vh; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* Loading */
+.loading { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; gap: 16px; }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--border-color); border-top-color: var(--purple-500); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Welcome */
+.welcomeSection { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 32px; margin-bottom: 24px; }
+.welcomeTitle { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+.welcomeDesc { color: var(--text-secondary); font-size: 0.9rem; }
+.statsRow { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+.statCard { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg-tertiary); border-radius: var(--radius-md); min-width: 150px; flex: 1; }
+.statCard strong { font-size: 1.3rem; display: block; }
+.statCard span { font-size: 0.75rem; color: var(--text-muted); }
+.statIcon { color: var(--purple-400); }
+
+/* Widgets Row */
+.widgetsRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.widget { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 24px; }
+.widget h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+.widgetBody { display: flex; flex-direction: column; gap: 10px; }
+.widgetStat { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); }
+.widgetHint { font-size: 0.82rem; color: var(--text-secondary); text-align: center; margin-top: 8px; }
+.careerAdvice { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+.skillTags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+/* Gauge */
+.gaugeWrapper { display: flex; flex-direction: column; align-items: center; }
+.gauge { position: relative; display: flex; align-items: center; justify-content: center; }
+.gaugeText { position: absolute; font-size: 1.5rem; font-weight: 800; color: var(--text-primary); }
+
+/* Section Title */
+.sectionTitle { font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; }
+
+/* Actions Grid */
+.actionsGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+.actionCard { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); text-decoration: none; color: inherit; transition: all 0.2s ease; }
+.actionCard:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+.actionIcon { width: 48px; height: 48px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.actionContent h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+.actionContent p { font-size: 0.8rem; color: var(--text-muted); }
+.actionArrow { color: var(--text-muted); margin-left: auto; flex-shrink: 0; }
+
+/* Profile Card */
+.profileCard { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 24px; }
+.profileHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.profileHeader h3 { font-size: 1rem; font-weight: 700; }
+.profileProgress {}
+.progressLabel { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.82rem; color: var(--text-secondary); }
+
+@media (max-width: 768px) {
+  .widgetsRow { grid-template-columns: 1fr; }
+  .actionsGrid { grid-template-columns: 1fr; }
+  .statsRow { flex-direction: column; }
+}

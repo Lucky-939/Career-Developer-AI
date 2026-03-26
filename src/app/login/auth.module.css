@@ -1,0 +1,214 @@
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+  position: relative;
+}
+
+.authGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.authHeader h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.authHeader p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ─── Step Indicator ─── */
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.stepActive {
+  background: var(--purple-600);
+  border-color: var(--purple-500);
+  color: white;
+}
+
+.stepLine {
+  width: 60px;
+  height: 2px;
+  background: var(--border-color);
+}
+
+/* ─── Error ─── */
+.errorBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  color: #fca5a5;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+
+/* ─── Form ─── */
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  z-index: 1;
+}
+
+.authInput {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.authInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+}
+
+.authInput::placeholder {
+  color: var(--text-muted);
+}
+
+.authBtn {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btnRow {
+  display: flex;
+  gap: 12px;
+}
+
+.btnRow .btn {
+  flex: 1;
+}
+
+/* ─── Divider ─── */
+.authDivider {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.authDivider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.authDivider span {
+  position: relative;
+  padding: 0 16px;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+/* ─── Footer ─── */
+.authFooter {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.authLink {
+  color: var(--purple-400);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.authLink:hover {
+  color: var(--purple-300);
+}
+
+@media (max-width: 480px) {
+  .authCard {
+    padding: 28px 20px;
+  }
+
+  .authHeader h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ─── Tag Selection (Step 3) ─── */
+.tagSection { display: flex; flex-direction: column; gap: 8px; }
+.tagLabel { font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.03em; }
+.tagGrid { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { padding: 6px 14px; border-radius: var(--radius-full); border: 1px solid var(--border-color); background: var(--bg-tertiary); color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-sans); cursor: pointer; transition: all 0.2s; }
+.tag:hover { border-color: var(--purple-500); color: var(--text-primary); }
+.tagActive { background: rgba(139,92,246,0.15); border-color: var(--purple-500); color: var(--purple-300); font-weight: 600; }

@@ -1,0 +1,381 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── User & Auth ──────────────────────────────────────────────
+enum UserRole {
+  STUDENT
+  ALUMNI
+  ADMIN
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String
+  email          String    @unique
+  password       String?
+  image          String?
+  role           UserRole  @default(STUDENT)
+  college        String?
+  branch         String?
+  cgpa           Float?
+  skills         String[]
+  interests      String[]
+  careerGoals    String?
+  programmingLangs String[]
+  tools          String[]
+  internshipExp  String?
+  currentYear    String?
+  selectedExam   String?
+  avatar         String?   // base64 or URL
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  mockAttempts   MockTestAttempt[]
+  careerProfile  CareerProfile?
+  chatMessages   ChatMessage[]
+  examAttempts   ExamAttempt[]
+  resumeAnalyses ResumeAnalysis[]
+  hackathons     Hackathon[]
+  alumniProfile  AlumniProfile?
+  askedQuestions AlumniQuestion[] @relation("StudentQuestions")
+  notifications  Notification[]
+  userProgress   UserProgress[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Higher Studies Module ────────────────────────────────────
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum ExamType {
+  GATE
+  GRE
+  UPSC
+  CAT
+  IELTS
+  TOEFL
+  GMAT
+  OTHER
+}
+
+model ExamQuestion {
+  id          String     @id @default(cuid())
+  examType    ExamType
+  topic       String
+  subtopic    String?
+  question    String
+  options     String[]
+  answer      String
+  explanation String?
+  difficulty  Difficulty
+  timeLimit   Int?
+  createdAt   DateTime   @default(now())
+
+  attempts    ExamAttempt[]
+}
+
+model ExamAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  questionId  String
+  userAnswer  String
+  isCorrect   Boolean
+  timeTaken   Int?
+  createdAt   DateTime @default(now())
+
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question ExamQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model University {
+  id              String  @id @default(cuid())
+  name            String
+  country         String
+  city            String?
+  ranking         Int?
+  minCGPA         Float?
+  minExamScore    Float?
+  examType        ExamType?
+  tuitionMin      Float?
+  tuitionMax      Float?
+  acceptanceRate  Float?
+  tier            String?
+  programs        String[]
+  description     String?
+  website         String?
+  createdAt       DateTime @default(now())
+}
+
+// ─── Placement Prep Module ────────────────────────────────────
+enum CompanyType {
+  SERVICE
+  PRODUCT
+  STARTUP
+  MNC
+}
+
+enum QuestionType {
+  APTITUDE
+  TECHNICAL
+  HR
+  CODING
+  PSEUDOCODE
+  DBMS
+}
+
+model Company {
+  id              String      @id @default(cuid())
+  name            String      @unique
+  type            CompanyType
+  minCGPA         Float?
+  requiredSkills  String[]
+  averagePackage  String?
+  description     String?
+  logo            String?
+  website         String?
+  createdAt       DateTime    @default(now())
+
+  questions       PlacementQuestion[]
+  mockTests       MockTest[]
+  experiences     InterviewExperience[]
+}
+
+model PlacementQuestion {
+  id          String       @id @default(cuid())
+  companyId   String
+  type        QuestionType
+  question    String
+  options     String[]
+  answer      String?
+  difficulty  Difficulty
+  year        Int?
+  explanation String?
+  codeSnippet String?
+  createdAt   DateTime     @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model InterviewExperience {
+  id        String   @id @default(cuid())
+  companyId String
+  role      String
+  year      Int
+  rounds    String[]
+  tips      String?
+  difficulty Difficulty
+  outcome   String?
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model MockTest {
+  id         String   @id @default(cuid())
+  title      String
+  companyId  String?
+  sections   Json
+  duration   Int
+  totalMarks Int
+  createdAt  DateTime @default(now())
+
+  company  Company?          @relation(fields: [companyId], references: [id])
+  attempts MockTestAttempt[]
+}
+
+model MockTestAttempt {
+  id            String   @id @default(cuid())
+  userId        String
+  mockTestId    String
+  score         Int
+  totalMarks    Int
+  sectionScores Json
+  weakAreas     String[]
+  missingSkills String[]
+  completedAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+}
+
+// ─── Career Developer Module ──────────────────────────────────
+model CareerProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  eligibleCompanies   String[]
+  alternativeCompanies String[]
+  suggestedRoles      String[]
+  skillGaps           String[]
+  careerPath          String?
+  roiAnalysis         Json?
+  generatedAt         DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── AI Chat ──────────────────────────────────────────────────
+enum ChatRole {
+  USER
+  AI
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  role      ChatRole
+  content   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Resume Analysis ──────────────────────────────────────────
+model ResumeAnalysis {
+  id          String   @id @default(cuid())
+  userId      String
+  score       Int
+  strengths   String[]
+  weaknesses  String[]
+  keywords    String[]
+  suggestions String[]
+  atsFriendly Boolean  @default(false)
+  targetRoles String[]
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Hackathon Tracker ────────────────────────────────────────
+enum HackathonStatus {
+  REGISTERED
+  ONGOING
+  COMPLETED
+  WON
+}
+
+model Hackathon {
+  id        String          @id @default(cuid())
+  userId    String
+  name      String
+  date      DateTime?
+  platform  String?
+  teamSize  Int?
+  status    HackathonStatus @default(REGISTERED)
+  result    String?
+  createdAt DateTime        @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Alumni Network ───────────────────────────────────────────
+model AlumniProfile {
+  id        String  @id @default(cuid())
+  userId    String  @unique
+  company   String
+  role      String
+  batchYear Int
+  linkedin  String?
+  bio       String?
+  createdAt DateTime @default(now())
+
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answers   AlumniAnswer[]
+}
+
+model AlumniQuestion {
+  id        String   @id @default(cuid())
+  studentId String
+  title     String
+  question  String
+  tags      String[]
+  createdAt DateTime @default(now())
+
+  student   User            @relation("StudentQuestions", fields: [studentId], references: [id], onDelete: Cascade)
+  answers   AlumniAnswer[]
+}
+
+model AlumniAnswer {
+  id         String   @id @default(cuid())
+  questionId String
+  alumniId   String
+  answer     String
+  createdAt  DateTime @default(now())
+
+  question AlumniQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  alumni   AlumniProfile  @relation(fields: [alumniId], references: [id], onDelete: Cascade)
+}
+
+// ─── Notifications ────────────────────────────────────────────
+enum NotificationType {
+  ELIGIBILITY_UPDATE
+  NEW_QUESTION
+  MOCK_REMINDER
+  ALUMNI_REPLY
+  HACKATHON_ALERT
+  GENERAL
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── User Progress Tracking ───────────────────────────────────
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  questionId  String
+  attempted   Boolean  @default(true)
+  correct     Boolean  @default(false)
+  attemptedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+}
